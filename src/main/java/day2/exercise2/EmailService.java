@@ -17,19 +17,19 @@ public class EmailService {
 
     public void countEmailProvider(String[] emails) {
         EmailService emailService = new EmailService();
-        Map<String, Integer> domainsCount = new HashMap<>();
+        Map<String, Integer> emailDomainsMap = new HashMap<>();
 
         for (String email : emailService.emails) {
             String domain = email.split("@")[1];
 
-            if (domainsCount.containsKey(domain)) {
-                domainsCount.put(domain, domainsCount.get(domain) + 1);
+            if (emailDomainsMap.containsKey(domain)) {
+                emailDomainsMap.put(domain, emailDomainsMap.get(domain) + 1);
             } else {
-                domainsCount.put(domain, 1);
+                emailDomainsMap.put(domain, 1);
             }
         }
 
-        for (Map.Entry<String, Integer> occurance : domainsCount.entrySet()) {
+        for (Map.Entry<String, Integer> occurance : emailDomainsMap.entrySet()) {
             System.out.println(occurance.getKey() + " has " + occurance.getValue() + " occurrences");
         }
     }

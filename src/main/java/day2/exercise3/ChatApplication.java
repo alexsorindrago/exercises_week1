@@ -32,10 +32,10 @@ public class ChatApplication {
         return censoredWord;
     }
 
-    public String censorSenteces(String sencence) {
+    public String censorSenteces(String sentence) {
         String censoredSentence = "";
 
-        String[] wordsInSentence = sencence.split(" ");
+        String[] wordsInSentence = sentence.split(" ");
         for (String word : wordsInSentence) {
             if (filteredWord.contains(word)) {
                 censoredSentence += replaceFilteredWords(word.length());
