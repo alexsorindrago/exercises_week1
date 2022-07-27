@@ -7,26 +7,21 @@ import day3.collections.exercise1.employee_app.repository.EmployeeRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EmployeeService implements EmployeeRepository {
     private final Map<Long, Employee> employeeMap;
-    private final Set<Project> projects;
 
     public EmployeeService() {
         this.employeeMap = new HashMap<>();
-        this.projects = new HashSet<>();
     }
 
     @Override
     public void create(Employee employee) {
         employeeMap.put(employee.getId(), employee);
-        projects.add(employee.getProject());
         System.out.println("Welcome new employee!: " + employee);
     }
 
@@ -81,15 +76,10 @@ public class EmployeeService implements EmployeeRepository {
         return result;
     }
 
-    //TODO: fix this
     @Override
-    public void assignProjectToEmployee(Long id, String projectName) {
+    public void assignProjectToEmployee(Long id, Project project) {
         Employee employee = employeeMap.get(id);
-        try {
-            Project projectFound = (Project) projects.stream().filter(project -> project.getProjectName().equals(projectName)).collect(Collectors.toList());
-            employee.setProject(projectFound);
-        } catch (Exception e) {
-            System.out.println("oops! project " + projectName + " does not exist yet.");
-        }
+        employee.setProject(project);
+        System.out.println("Project " + project + " was added to " + employee);
     }
 }

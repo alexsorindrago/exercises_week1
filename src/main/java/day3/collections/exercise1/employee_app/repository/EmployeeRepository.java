@@ -2,6 +2,7 @@ package day3.collections.exercise1.employee_app.repository;
 
 import day3.collections.exercise1.employee_app.exception.EmployeeNotFoundException;
 import day3.collections.exercise1.employee_app.model.Employee;
+import day3.collections.exercise1.employee_app.model.Project;
 
 import java.util.List;
 
@@ -21,6 +22,6 @@ public interface EmployeeRepository {
 
     List<Employee> getEmployeesByProjectName(String projectName);
 
-    void assignProjectToEmployee(Long employeeId, String projectName);
+    void assignProjectToEmployee(Long employeeId, Project project);
 
 }

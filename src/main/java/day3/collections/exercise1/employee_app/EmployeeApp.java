@@ -47,9 +47,8 @@ public class EmployeeApp {
         service.deleteEmployee(2L);
         System.out.println("----------------------");
 
-        service.assignProjectToEmployee(2L, rings.getProjectName());
+        service.assignProjectToEmployee(2L, rings);
         System.out.println("----------------------");
-
 
     }
 

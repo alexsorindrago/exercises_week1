@@ -18,6 +18,13 @@ public class Employee {
         this.salary = salary;
     }
 
+    public Employee(Long id, String name, Integer salary, Project project) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.project = project;
+    }
+
     public Long getId() {
         return id;
     }
