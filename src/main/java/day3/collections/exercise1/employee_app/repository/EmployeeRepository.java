@@ -22,6 +22,6 @@ public interface EmployeeRepository {
 
     List<Employee> getEmployeesByProjectName(String projectName);
 
-    void assignProjectToEmployee(Long employeeId, Project project);
+    void assignProjectToEmployee(Employee employee, Project project);
 
 }

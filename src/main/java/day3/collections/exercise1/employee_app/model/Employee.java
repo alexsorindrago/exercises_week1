@@ -1,7 +1,5 @@
 package day3.collections.exercise1.employee_app.model;
 
-import java.util.Objects;
-
 public class Employee {
     private Long id;
     private String name;
@@ -16,13 +14,6 @@ public class Employee {
         this.id = id;
         this.name = name;
         this.salary = salary;
-    }
-
-    public Employee(Long id, String name, Integer salary, Project project) {
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
-        this.project = project;
     }
 
     public Long getId() {
@@ -55,26 +46,6 @@ public class Employee {
 
     public void setProject(Project project) {
         this.project = project;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Employee employee = (Employee) o;
-
-        if (!Objects.equals(id, employee.id)) return false;
-        if (!Objects.equals(name, employee.name)) return false;
-        return Objects.equals(salary, employee.salary);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (salary != null ? salary.hashCode() : 0);
-        return result;
     }
 
     @Override

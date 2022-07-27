@@ -25,11 +25,15 @@ public class EmployeeApp {
         projectService.create(rings);
         System.out.println("----------------------");
 
+        Employee e1 = new Employee(1L, "Jack", 500);
+        Employee e2 = new Employee(2L, "Sparrow", 5000);
+        Employee e3 = new Employee(3L, "Frodo", 50000);
+        Employee e4 = new Employee(4L, "Smeagol", 50000);
 
-        service.create(new Employee(1L, "Jack", 500));
-        service.create(new Employee(2L, "Sparrow", 5000));
-        service.create(new Employee(3L, "Frodo", 50000));
-        service.create(new Employee(4L, "Smeagol", 50000));
+        service.create(e1);
+        service.create(e2);
+        service.create(e3);
+        service.create(e4);
         System.out.println("----------------------");
 
         service.getEmployeesBySalary(50000);
@@ -47,7 +51,10 @@ public class EmployeeApp {
         service.deleteEmployee(2L);
         System.out.println("----------------------");
 
-        service.assignProjectToEmployee(2L, rings);
+        service.assignProjectToEmployee(e2, rings);
+        System.out.println("----------------------");
+
+        service.assignProjectToEmployee(e3, rings);
         System.out.println("----------------------");
 
     }

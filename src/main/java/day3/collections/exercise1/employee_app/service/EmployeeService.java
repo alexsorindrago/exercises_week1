@@ -6,37 +6,43 @@ import day3.collections.exercise1.employee_app.model.Project;
 import day3.collections.exercise1.employee_app.repository.EmployeeRepository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class EmployeeService implements EmployeeRepository {
-    private final Map<Long, Employee> employeeMap;
+
+    private final List<Employee> employeesDB;
 
     public EmployeeService() {
-        this.employeeMap = new HashMap<>();
+        this.employeesDB = new ArrayList<>();
     }
 
     @Override
     public void create(Employee employee) {
-        employeeMap.put(employee.getId(), employee);
-        System.out.println("Welcome new employee!: " + employee);
+        employeesDB.add(employee);
+        if (employeesDB.contains(employee)) {
+            System.out.println("added new employee: " + employee);
+        } else {
+            System.out.println("something went wrong, employee was not added");
+        }
     }
 
     @Override
     public void updateEmployeeSalary(Long id, Integer salary) {
-        Employee employeeToUpdate = employeeMap.get(id);
+        Employee employeeToUpdate = employeesDB.stream().filter(found -> found.getId().equals(id)).findAny().get();
         employeeToUpdate.setSalary(salary);
-        Employee updatedEmployee = employeeMap.get(id);
+
+        Employee updatedEmployee = employeesDB.stream().filter(found -> found.getId().equals(id)).findAny().get();
         System.out.println("salary was updated: " + updatedEmployee);
     }
 
     @Override
     public void deleteEmployee(Long id) throws EmployeeNotFoundException {
-        if (employeeMap.containsKey(id)) {
-            Employee employee = employeeMap.remove(id);
+        Employee employee = null;
+        if (employeesDB.contains(employeesDB.stream().filter(found -> found.getId().equals(id)).findAny().get())) {
+            employee = employeesDB.stream().filter(found -> found.getId().equals(id)).findAny().get();
+            employeesDB.remove(employee);
             System.out.println(employee + " has left the building :( ");
         } else {
             throw new EmployeeNotFoundException();
@@ -45,30 +51,29 @@ public class EmployeeService implements EmployeeRepository {
 
     @Override
     public Employee getEmployeeByID(Long id) {
-        Employee employee = employeeMap.get(id);
+        Employee employee = employeesDB.stream().filter(found -> found.getId().equals(id)).findAny().get();
         System.out.println("employee by id: " + employee);
         return employee;
     }
 
     @Override
     public List<Employee> getAllEmployees() {
-        return new ArrayList<>(employeeMap.values());
+        List<Employee> list = employeesDB;
+        return list;
     }
 
     @Override
     public List<Employee> getEmployeesBySalary(Integer salary) {
-        List<Employee> employeeList = new ArrayList<>(employeeMap.values());
-        List result = employeeList.stream().filter(employee -> Objects.equals(employee.getSalary(), salary)).collect(Collectors.toList());
+        List result = employeesDB.stream().filter(employee -> Objects.equals(employee.getSalary(), salary)).collect(Collectors.toList());
         System.out.println("these guys earn the same: " + result);
         return result;
     }
 
     @Override
     public List<Employee> getEmployeesByProjectName(String projectName) {
-        List result = new ArrayList();
+        List result = null;
         try {
-            List<Employee> employeeList = new ArrayList<>(employeeMap.values());
-            result = employeeList.stream().filter(employee -> Objects.equals(employee.getProject().getProjectName(), projectName)).collect(Collectors.toList());
+            result = employeesDB.stream().filter(employee -> employee.getProject().getProjectName().equals(projectName)).collect(Collectors.toList());
             System.out.println("The following are on the same project: " + result);
         } catch (Exception e) {
             System.out.println("oops! no employees assigned to same project");
@@ -77,9 +82,9 @@ public class EmployeeService implements EmployeeRepository {
     }
 
     @Override
-    public void assignProjectToEmployee(Long id, Project project) {
-        Employee employee = employeeMap.get(id);
+    public void assignProjectToEmployee(Employee employee, Project project) {
+        ;
         employee.setProject(project);
-        System.out.println("Project " + project + " was added to " + employee);
+        System.out.println(project + " was added to " + employee);
     }
 }
