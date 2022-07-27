@@ -4,6 +4,7 @@ import day3.collections.exercise1.employee_app.exception.EmployeeNotFoundExcepti
 import day3.collections.exercise1.employee_app.model.Employee;
 import day3.collections.exercise1.employee_app.model.Project;
 import day3.collections.exercise1.employee_app.service.EmployeeService;
+import day3.collections.exercise1.employee_app.service.ProjectService;
 
 public class EmployeeApp {
 
@@ -13,11 +14,17 @@ public class EmployeeApp {
 //        3. Update employee salary based on Id
 //        4. Create employees
 //        5. Allocate project to employees
-
-        EmployeeService service = new EmployeeService();
-
         Project pirates = new Project("Lord of the Pirates");
         Project rings = new Project("Rings of the Carribean");
+
+        EmployeeService service = new EmployeeService();
+        ProjectService projectService = new ProjectService();
+
+        projectService.create(pirates);
+        System.out.println("----------------------");
+        projectService.create(rings);
+        System.out.println("----------------------");
+
 
         service.create(new Employee(1L, "Jack", 500));
         service.create(new Employee(2L, "Sparrow", 5000));

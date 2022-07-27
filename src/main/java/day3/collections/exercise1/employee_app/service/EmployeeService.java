@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -87,8 +86,8 @@ public class EmployeeService implements EmployeeRepository {
     public void assignProjectToEmployee(Long id, String projectName) {
         Employee employee = employeeMap.get(id);
         try {
-            Optional<Project> isPresent = projects.stream().filter(project -> project.getProjectName().equals(projectName)).findAny();
-            employee.setProject(isPresent.get());
+            Project projectFound = (Project) projects.stream().filter(project -> project.getProjectName().equals(projectName)).collect(Collectors.toList());
+            employee.setProject(projectFound);
         } catch (Exception e) {
             System.out.println("oops! project " + projectName + " does not exist yet.");
         }
