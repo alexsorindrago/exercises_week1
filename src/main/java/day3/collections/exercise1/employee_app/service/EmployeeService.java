@@ -71,13 +71,11 @@ public class EmployeeService implements EmployeeRepository {
 
     @Override
     public List<Employee> getEmployeesByProjectName(String projectName) {
-        List result = null;
-        try {
-            result = employeesDB.stream().filter(employee -> employee.getProject().getProjectName().equals(projectName)).collect(Collectors.toList());
-            System.out.println("The following are on the same project: " + result);
-        } catch (Exception e) {
-            System.out.println("oops! no employees assigned to same project");
-        }
+        List result = employeesDB.stream()
+                .filter(employee -> Objects.equals(employee.getProject().getProjectName(), projectName))
+                .collect(Collectors.toList());
+        System.out.println("The following are on the same project: " + result);
+
         return result;
     }
 

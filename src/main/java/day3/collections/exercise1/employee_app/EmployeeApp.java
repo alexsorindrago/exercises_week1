@@ -39,9 +39,6 @@ public class EmployeeApp {
         service.getEmployeesBySalary(50000);
         System.out.println("----------------------");
 
-        service.getEmployeesByProjectName(pirates.getProjectName());
-        System.out.println("----------------------");
-
         service.getEmployeeByID(1L);
         System.out.println("----------------------");
 
@@ -51,10 +48,19 @@ public class EmployeeApp {
         service.deleteEmployee(2L);
         System.out.println("----------------------");
 
+        service.assignProjectToEmployee(e1, rings);
+        System.out.println("----------------------");
+
         service.assignProjectToEmployee(e2, rings);
         System.out.println("----------------------");
 
-        service.assignProjectToEmployee(e3, rings);
+        service.assignProjectToEmployee(e3, pirates);
+        System.out.println("----------------------");
+
+        service.assignProjectToEmployee(e4, pirates);
+        System.out.println("----------------------");
+
+        service.getEmployeesByProjectName(pirates.getProjectName());
         System.out.println("----------------------");
 
     }
